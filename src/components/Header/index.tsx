@@ -57,10 +57,9 @@ const Header = () => {
                 } `}
               >
                 <Image
-                  src="/images/logo/logo 1.jpg"
+                  src="/images/logo/logo12.png"
                   alt="logo"
                   className="w-full dark:hidden"
-                  // style={{ width: "140px", height: "100px" }}
                   width={140}
                   height={0}
                 />
@@ -68,7 +67,6 @@ const Header = () => {
                   src="/images/logo/logo12.png"
                   alt="logo"
                   className="hidden w-full dark:block"
-                  // style={{ width: "140px", height: "100px" }}
                   width={140}
                   height={0}
                 />
