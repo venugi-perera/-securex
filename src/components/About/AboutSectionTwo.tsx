@@ -37,16 +37,20 @@ const AboutSectionTwo = () => {
                   background
                 </p>
               </div>
-              {/* <div className="mb-9">
-                <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  Premier support
-                </h3>
-                <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt.
+              <div className="mb-9">
+                {/* <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
+                  // Premier support //{" "}
+                </h3> */}
+                <p className="font-small text-base leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
+                  SECUREX is founded by a retired senior commissioned officer of
+                  Sri Lanka Army. Helee Lanka Management includes a Senior Army
+                  Officer as Security Consultant and a Retired District Judge as
+                  Legal Consultant. Helee Lanka has been providing exceptional,
+                  reliable and professional security services to business
+                  organizations and residents throughout the country
                 </p>
               </div>
-              <div className="mb-1">
+              {/*  <div className="mb-1">
                 <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
                   Next.js
                 </h3>
