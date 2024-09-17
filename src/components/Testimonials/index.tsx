@@ -1,8 +1,16 @@
+"use client";
+
 import { Testimonial } from "@/types/testimonial";
 import SectionTitle from "../Common/SectionTitle";
 import SingleTestimonial from "./SingleTestimonial";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useState } from "react";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import { Modal, Box, TextField, Stack } from "@mui/material";
 
-const testimonialData: Testimonial[] = [
+const testimonials: Testimonial[] = [
   {
     id: 1,
     name: "Musharof Chy",
@@ -33,21 +41,113 @@ const testimonialData: Testimonial[] = [
 ];
 
 const Testimonials = () => {
+  const editAccess = sessionStorage.getItem("editAccess");
+  const [testimonialData, setTestimonialData]: any = useState(testimonials);
+  const [selectedTestimonial, setSelectedTestimonial]: any = useState("");
+  const [modifiedData, setModifiedData]: any = useState({});
+  const [open, setOpen] = useState(false);
+
+  const handleDelete = (id) => {
+    const filteredData = testimonialData.filter((blog) => blog.id !== id);
+    setTestimonialData(filteredData);
+  };
+
+  const handleEdit = (blog) => {
+    setOpen(true);
+    setSelectedTestimonial(blog.id);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const handleOnChange = (type, value) => {
+    if (type === "content") {
+      setModifiedData({ ...modifiedData, content: value });
+    } else if (type === "description") {
+      setModifiedData({ ...modifiedData, description: value });
+    }
+  };
+
+  const handleSave = () => {
+    const updatedData = testimonialData.map((blog) => {
+      if (blog.id === selectedTestimonial) {
+        return {
+          ...blog,
+          content: modifiedData.content,
+        };
+      }
+      return blog;
+    });
+    setTestimonialData(updatedData);
+    setModifiedData({});
+    setOpen(false);
+  };
+
   return (
-    <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28">
+    <section className="relative z-10 bg-gray-light py-16 dark:bg-bg-color-dark md:py-20 lg:py-28">
       <div className="container">
-        <SectionTitle
-          title="What Our Clients Says"
-          paragraph=""
-          center
-        />
+        <SectionTitle title="What Our Clients Says" paragraph="" center />
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           {testimonialData.map((testimonial) => (
-            <SingleTestimonial key={testimonial.id} testimonial={testimonial} />
+            <div key={testimonial.id} className="w-full">
+              <SingleTestimonial
+                key={testimonial.id}
+                testimonial={testimonial}
+              />
+              {editAccess && (
+                <>
+                  <EditIcon
+                    onClick={() => handleEdit(testimonial)}
+                    className="cursor-pointer"
+                  />
+                  <DeleteIcon onClick={() => handleDelete(testimonial.id)} />
+                </>
+              )}
+            </div>
           ))}
         </div>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Stack spacing={2}>
+            <TextField
+              id="outlined-basic"
+              label="Content"
+              variant="outlined"
+              onChange={(e) => handleOnChange("content", e.target.value)}
+            />
+
+            <Button
+              variant="contained"
+              onClick={() => {
+                handleSave();
+              }}
+            >
+              Save
+            </Button>
+          </Stack>
+        </Box>
+      </Modal>
+
       <div className="absolute right-0 top-5 z-[-1]">
         <svg
           width="238"

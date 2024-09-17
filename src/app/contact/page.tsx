@@ -14,7 +14,9 @@ const Contact = () => {
   return (
     <>
       <Breadcrumb pageName="Contact" description="" />
-      <ContactForm />
+      <div style={{ marginTop: "-10px" }}>
+        <ContactForm />
+      </div>
 
       {/* <section className="pb-[120px] pt-[120px]">
         <div className="container">
