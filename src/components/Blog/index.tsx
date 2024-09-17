@@ -11,21 +11,7 @@ import Button from "@mui/material/Button";
 import { Modal, Box, TextField, Stack } from "@mui/material";
 
 const Blog = () => {
-  const editAccess = sessionStorage.getItem("editAccess");
-  const [blogData, setBlogData]: any = useState(blogs);
-  const [selectedBlog, setSelectedBlog]: any = useState("");
-  const [modifiedData, setModifiedData]: any = useState({});
   const [open, setOpen] = useState(false);
-
-  const handleDelete = (id) => {
-    const filteredData = blogData.filter((blog) => blog.id !== id);
-    setBlogData(filteredData);
-  };
-
-  const handleEdit = (blog) => {
-    setOpen(true);
-    setSelectedBlog(blog.id);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -44,27 +30,27 @@ const Blog = () => {
   };
 
   const handleOnChange = (type, value) => {
-    if (type === "title") {
-      setModifiedData({ ...modifiedData, title: value });
-    } else if (type === "description") {
-      setModifiedData({ ...modifiedData, description: value });
-    }
+    // if (type === "title") {
+    //   setModifiedData({ ...modifiedData, title: value });
+    // } else if (type === "description") {
+    //   setModifiedData({ ...modifiedData, description: value });
+    // }
   };
 
   const handleSave = () => {
-    const updatedData = blogData.map((blog) => {
-      if (blog.id === selectedBlog) {
-        return {
-          ...blog,
-          title: modifiedData.title,
-          paragraph: modifiedData.description,
-        };
-      }
-      return blog;
-    });
-    setBlogData(updatedData);
-    setModifiedData({});
-    setOpen(false);
+    // const updatedData = blogData.map((blog) => {
+    //   if (blog.id === selectedBlog) {
+    //     return {
+    //       ...blog,
+    //       title: modifiedData.title,
+    //       paragraph: modifiedData.description,
+    //     };
+    //   }
+    //   return blog;
+    // });
+    // setBlogData(updatedData);
+    // setModifiedData({});
+    // setOpen(false);
   };
 
   return (
@@ -80,18 +66,9 @@ const Blog = () => {
         />
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-3">
-          {blogData.map((blog) => (
+          {blogs.map((blog) => (
             <div key={blog.id} className="w-full">
               <SingleBlog blog={blog} />
-              {editAccess && (
-                <>
-                  <EditIcon
-                    onClick={() => handleEdit(blog)}
-                    className="cursor-pointer"
-                  />
-                  <DeleteIcon onClick={() => handleDelete(blog.id)} />
-                </>
-              )}
             </div>
           ))}
 

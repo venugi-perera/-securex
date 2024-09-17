@@ -41,21 +41,7 @@ const testimonials: Testimonial[] = [
 ];
 
 const Testimonials = () => {
-  const editAccess = sessionStorage.getItem("editAccess");
-  const [testimonialData, setTestimonialData]: any = useState(testimonials);
-  const [selectedTestimonial, setSelectedTestimonial]: any = useState("");
-  const [modifiedData, setModifiedData]: any = useState({});
   const [open, setOpen] = useState(false);
-
-  const handleDelete = (id) => {
-    const filteredData = testimonialData.filter((blog) => blog.id !== id);
-    setTestimonialData(filteredData);
-  };
-
-  const handleEdit = (blog) => {
-    setOpen(true);
-    setSelectedTestimonial(blog.id);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -73,28 +59,9 @@ const Testimonials = () => {
     p: 4,
   };
 
-  const handleOnChange = (type, value) => {
-    if (type === "content") {
-      setModifiedData({ ...modifiedData, content: value });
-    } else if (type === "description") {
-      setModifiedData({ ...modifiedData, description: value });
-    }
-  };
+  const handleOnChange = (type, value) => {};
 
-  const handleSave = () => {
-    const updatedData = testimonialData.map((blog) => {
-      if (blog.id === selectedTestimonial) {
-        return {
-          ...blog,
-          content: modifiedData.content,
-        };
-      }
-      return blog;
-    });
-    setTestimonialData(updatedData);
-    setModifiedData({});
-    setOpen(false);
-  };
+  const handleSave = () => {};
 
   return (
     <section className="relative z-10 bg-gray-light py-16 dark:bg-bg-color-dark md:py-20 lg:py-28">
@@ -102,21 +69,12 @@ const Testimonials = () => {
         <SectionTitle title="What Our Clients Says" paragraph="" center />
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-          {testimonialData.map((testimonial) => (
+          {testimonials.map((testimonial) => (
             <div key={testimonial.id} className="w-full">
               <SingleTestimonial
                 key={testimonial.id}
                 testimonial={testimonial}
               />
-              {editAccess && (
-                <>
-                  <EditIcon
-                    onClick={() => handleEdit(testimonial)}
-                    className="cursor-pointer"
-                  />
-                  <DeleteIcon onClick={() => handleDelete(testimonial.id)} />
-                </>
-              )}
             </div>
           ))}
         </div>
