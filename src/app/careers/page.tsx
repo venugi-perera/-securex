@@ -1,3 +1,4 @@
+import CareerPage from "@/components/Career/Career";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import ContactForm from "@/components/Contact";
 
@@ -13,7 +14,7 @@ const ContactPage = () => {
   return (
     <>
       <Breadcrumb pageName="Careers" description="" />
-
+      <CareerPage />
     </>
   );
 };

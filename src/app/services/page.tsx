@@ -7,7 +7,7 @@ const page = () => {
   return (
     <>
       <Breadcrumb pageName="Services" description="" />
-      <div className="mb-12 grid grid-cols-1 gap-x-6 gap-y-14 pl-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-12 grid grid-cols-1 gap-x-6 gap-y-14 pl-20 md:grid-cols-2 lg:grid-cols-3 ">
         {featuresData.map((feature) => (
           <SingleFeature key={feature.id} feature={feature} />
         ))}
